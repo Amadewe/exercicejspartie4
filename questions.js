@@ -70,7 +70,19 @@ var valeurAbsolue = function (nombre) {
 }
 // Afficher les valeurs absolues de plusieurs nombres
 var valeurAbsolueArray = function (array) {
-    return Math.abs(Math.PI(array));
+  // Une boucle for répète des instructions jusqu'à ce qu'une condition donnée ne soit plus vérifiée.
+//   var x = ["un", "deux", "trois" ]; => dans l'exo notre variable x est égal à array
+//   for(var i= 0; i < x.length; i++){
+// Maintenant on veut que notre variable soit égale à la valeur absolue de x + i
+// donc on crée une variable var1 avec la fonction Math.abs()
+//   var var1 = Math.abs(x[i]);
+// }
+
+for (var i = 0; i < array.length; i++) {
+  var ValueAbsolue = Math.abs(array[i]);
+  array[i] = ValueAbsolue;
+}
+    return array;
 }
 // Calculer la surface d'un cercle en fonction de son rayon. L'arondir à l'entier le plus proche
 var sufaceCercle = function (rayon) {
