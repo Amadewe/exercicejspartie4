@@ -1,7 +1,7 @@
 /**
  * Exercice sur les chaines de caractères.
- * Trouvez la façon de faire la plus optimal.
- * Il peut y avoir plusieur façon de faire.
+ * Trouvez la façon de faire la plus optimale.
+ * Il peut y avoir plusieurs façon de faire.
  */
 
  // on cherche la taille du texte avec la fonction length
@@ -13,7 +13,7 @@ var tailleString = function (texte) {
 // On remplace e par des espaces avec la fonction replace
 // la méthode replace() renvoie une nouvelle chaîne de caractères dans laquelle tout ou partie des correspondances à un modèle sont remplacées par un remplacement
 var remplaceECar = function (texte) {
-    return texte.replace('e', ' ');
+    return texte.replace('e',' ');
 }
 // on concat le texte1 et 2 avec la fonction concat
 // La méthode concat() combine le texte de plusieurs chaînes avec la chaîne appelante et renvoie la nouvelle chaîne ainsi formée.
@@ -23,14 +23,20 @@ var concatString = function (texte1, texte2) {
 //  Afficher le cinquième caractère de la chaine içi un "e" avec la propriété substr
 // La méthode substr() retourne la partie d'une chaîne de caractères comprise entre l'indice de départ et un certain nombre de caractères après celui-ci.
 // .substr(début[, longueur])
+// charAt permet d'extraire le 5 ème caractère
 var afficherCar5 = function (texte) {
-    return texte.substr(4, 1);
+    // return texte.substr(4, 1); Bon aussi mais déprécié, il faut mieux mettre substring
+    return texte.charAt(4);
 }
 // Afficher les 9 premiers caractères
 // La méthode substr() retourne la partie d'une chaîne de caractères comprise entre l'indice de départ et un certain nombre de caractères après celui-ci.
 // .substr(début[, longueur])
+// différence entre .substr et substring
+// Les arguments de la méthode substring() représentent les indices de début et de fin sur la chaîne.
+// Pour substr(), les arguments représentent l'indice de début et le nombre de caractères à utiliser pour la chaîne résultante.
 var afficher9Car = function (texte) {
-    return texte.substr(0, 9);
+    return texte.substring(0, 9);
+    // return texte.slice(0, 9); possible aussi mais substring est plus "puissant"
 }
 //  Mettre en majuscule la chaine
 // La méthode toUpperCase() retourne la valeur de la chaîne courante, convertie en majuscules
@@ -51,20 +57,27 @@ var SupprEspaceString = function (texte) {
 // L'opérateur typeof renvoie une chaîne qui indique le type de son opérande.
 // operande est une expression qui représente la valeur dont on souhaite obtenir le type.
 //  'string', 'numbers', 'boolean'... sont des résultats possibles de l'opérateur typeof.
-//  exemple : typeof "bla" === 'string';
+//  exemple : typeof 'bla' === 'string';
 var IsString = function (texte) {
-    return typeof '' === 'string';
+    if (typeof texte == 'string') {
+      return true;
+    }
 }
 // Afficher l'extension du fichier
 // La méthode split() permet de diviser une chaîne de caractères à partir d'un séparateur pour fournir un tableau de sous-chaînes.
 // içi on met extention[1], car on veut afficher l'extention si on voulait le nom du fichier on mettrait extention[0]
 var AfficherExtensionString = function (texte) {
-  var extension = texte.split('.');
-    return extension[1];
+  var regex = /[^.]*$/i;
+  var result = texte.match(regex);
+  return result[0];
+
+  // var extension = texte.split('.');
+  //   return extension[1];
 }
 // Compter le nombre d'espace dans la chaine
 var NombreEspaceString = function (texte) {
     return texte.split(' ').length - 1;
+    // possibilité de faire avec des regex !
 }
 //  Inverser une chaine de caractères
 // split renvoie un tableau sur lequel on peut appliquer reverse
@@ -78,6 +91,8 @@ var InverseString = function (texte) {
  */
 
  // Calculer la puissance d'un nombre par rapport à un autre (x à la puissance y)
+ // Math est un objet
+ // .pow est une méthode
  // La fonction Math.pow() renvoie un nombre à une certaine puissance
 var calculPuissance = function (x, y) {
     return Math.pow(x, y);
@@ -94,15 +109,20 @@ var valeurAbsolueArray = function (array) {
 //   for(var i= 0; i < x.length; i++){
 // Maintenant on veut que notre variable soit égale à la valeur absolue de x + i
 // donc on crée une variable var1 avec la fonction Math.abs()
+// il y a plus simple que la bouche for
 //   var var1 = Math.abs(x[i]);
 // }
+// for (var i = 0; i < array.length; i++) {
+//   var ValueAbsolue = Math.abs(array[i]);
+//   array[i] = ValueAbsolue;
+// }
+//     return array;
+// }
 
-for (var i = 0; i < array.length; i++) {
-  var ValueAbsolue = Math.abs(array[i]);
-  array[i] = ValueAbsolue;
+// La méthode map() crée un nouveau tableau avec les résultats de l'appel d'une fonction fournie sur chaque élément du tableau appelant.
+return array.map(Math.abs);
 }
-    return array;
-}
+
 // Calculer la surface d'un cercle en fonction de son rayon. L'arondir à l'entier le plus proche
 // La propriété Math.PI représente le ratio entre le périmètre d'un cercle et son diamètre. Elle vaut environ 3.14159:
 // La fonction Math.round() retourne la valeur d'un nombre arrondi à l'entier le plus proche.
@@ -116,5 +136,6 @@ var hypothenuse = function (ab, ac) {
 }
 // Calculer l'IMC (Poids / (taille x taille).Ne garder que deux chiffres après la virgule.
 var calculIMC = function (poids, taille) {
-    return Math.round((poids/(taille*taille)*100))/100;
+    var imc = (poids/Math.pow(taille,2)).toFixed(2);
+    return Number(imc); 
 }
